@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mashtech</title>
 <link rel="icon" type="image/png" href="assets/favicon-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -841,10 +841,19 @@ function scheduleCardsResize() {
   resizeTimer = setTimeout(renderCards, 150);
 }
 window.addEventListener('resize', scheduleCardsResize);
+function resetViewportZoom() {
+  const vp = document.querySelector('meta[name="viewport"]');
+  if (!vp) return;
+  const original = vp.getAttribute('content');
+  vp.setAttribute('content', original + ', maximum-scale=1');
+  requestAnimationFrame(() => vp.setAttribute('content', original));
+}
+
 window.addEventListener('orientationchange', () => {
   renderCards();
-  setTimeout(renderCards, 100);
-  setTimeout(renderCards, 400);
+  resetViewportZoom();
+  setTimeout(() => { renderCards(); resetViewportZoom(); }, 100);
+  setTimeout(() => { renderCards(); resetViewportZoom(); }, 400);
 });
 
 render();
