@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mashtech</title>
+<title>Mashtech — Custom Websites, Web Apps & AI Solutions</title>
+<meta name="description" content="Mashtech builds custom websites, web applications, AI-powered tools and business automation for companies that want their software to actually work for them. From planning to a live product.">
+<link rel="canonical" href="https://mashtech.co.il/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mashtech — Custom Websites, Web Apps & AI Solutions">
+<meta property="og:description" content="Custom websites, web applications, AI-powered tools and business automation — from planning to a working product.">
+<meta property="og:url" content="https://mashtech.co.il/">
+<meta property="og:image" content="https://mashtech.co.il/assets/mashtatech-logo.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mashtech — Custom Websites, Web Apps & AI Solutions">
+<meta name="twitter:description" content="Custom websites, web applications, AI-powered tools and business automation — from planning to a working product.">
 <link rel="icon" type="image/png" href="assets/favicon-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#0E100E;}
+body{margin:0;background:#0E100E;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
 a:hover{color:inherit;}
 *:focus-visible{outline:2px solid #C9F7C5;outline-offset:3px;}
@@ -38,6 +49,15 @@ a:hover{color:inherit;}
 .contact-outline:hover{background:#0E100E;border-color:#0E100E;color:#C9F7C5;}
 .fab:hover{transform:scale(1.07);}
 [data-reveal]{transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);}
+[data-reveal-stagger]{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1);}
+[data-reveal-stagger].is-in{opacity:1;transform:translateY(0);}
+#ctaGlow{position:absolute;inset:0;pointer-events:none;border-radius:24px;opacity:0;transform:scale(.95);transition:opacity 1s ease,transform 1s ease;background:radial-gradient(60% 55% at 50% 100%,rgba(14,16,14,.28),transparent 72%);}
+#ctaGlow.is-in{opacity:1;transform:scale(1);}
+.skip-link{position:absolute;top:-48px;left:12px;z-index:100;background:#C9F7C5;color:#0E100E;padding:12px 20px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;border-radius:2px;transition:top .2s ease;}
+.skip-link:focus{top:12px;}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
 
 @media (max-width: 760px) {
   #navLinks{display:none !important;}
@@ -58,8 +78,8 @@ a:hover{color:inherit;}
   #siteFooter{padding:48px 20px 20px !important;}
   #copyrightWrap{padding:0 20px 32px !important;}
   #services h2, #work h2, #process h2, #about h2{font-size:28px !important;}
-  #services > div[style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr !important;}
-  #services > div[style*="grid-template-columns:repeat(4"] > div{border-inline-end:none !important;border-bottom:1px solid rgba(233,235,232,.14);}
+  #servicesGrid{grid-template-columns:1fr !important;}
+  #servicesGrid > div{border-inline-end:none !important;border-bottom:1px solid rgba(233,235,232,.14);}
   #tiltZone{height:300px !important;perspective:none !important;}
   #testimonialsSection{margin-top:72px !important;padding:0 20px !important;}
   #testimonialsSection > div[style*="grid-template-columns:300px"]{grid-template-columns:1fr !important;}
@@ -83,7 +103,8 @@ a:hover{color:inherit;}
 </style>
 </head>
 <body>
-<div id="root" dir="rtl" lang="he" style="background:#0E100E;color:#E9EBE8;font-family:'Assistant',sans-serif;font-weight:300;min-height:100vh;position:relative;overflow-x:hidden;">
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="root" dir="rtl" lang="he" style="background:#0E100E;color:#E9EBE8;font-family:'Assistant',sans-serif;font-weight:300;min-height:100vh;position:relative;">
 
   <canvas id="field" aria-hidden="true" style="position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0;display:block;"></canvas>
   <div aria-hidden="true" style="position:fixed;inset-inline:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,247,197,.6),transparent);pointer-events:none;z-index:0;animation:mHeroScan 11s cubic-bezier(.5,0,.5,1) infinite;"></div>
@@ -104,6 +125,7 @@ a:hover{color:inherit;}
     </div>
   </nav>
 
+  <main id="main">
   <section id="top" style="position:relative;z-index:1;padding:118px 56px 92px;overflow:hidden;">
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(12,1fr);">
       <span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span>
@@ -112,7 +134,7 @@ a:hover{color:inherit;}
       <div data-reveal style="display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;">
         <span style="width:6px;height:6px;background:#C9F7C5;display:inline-block;"></span><span data-t="hero_kicker"></span>
       </div>
-      <h1 data-reveal style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:100px;line-height:1.04;letter-spacing:-.03em;margin:34px 0 0;max-width:17ch;">
+      <h1 data-reveal style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:74px;line-height:1.1;letter-spacing:-.02em;margin:34px 0 0;max-width:20ch;">
         <span id="heroTitleA"></span><span style="white-space:nowrap;"><span style="position:relative;display:inline-block;"><span style="position:absolute;inset-inline-start:-10px;inset-inline-end:-10px;bottom:.1em;height:.76em;background:#C9F7C5;z-index:0;"></span><span id="heroTitleMark" style="position:relative;z-index:1;color:#0E100E;"></span></span></span> <span id="heroTitleB"></span>
       </h1>
       <div data-reveal style="margin-top:54px;">
@@ -125,7 +147,8 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <div id="techStrip" style="position:relative;z-index:1;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;">
+  <div id="techStrip" style="position:relative;z-index:1;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;align-items:center;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;">
+    <span data-t="tech_label" style="color:#C9F7C5;opacity:.9;"></span>
     <span>React</span><span>Next.js</span><span>Claude / OpenAI</span><span>Supabase</span><span>Vercel</span>
     <span id="location" style="margin-inline-start:auto;"></span>
   </div>
@@ -135,35 +158,48 @@ a:hover{color:inherit;}
       <span data-t="nav_services" data-prefix="01 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
       <h2 data-t="services_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
     </div>
-    <div style="margin-top:64px;border-top:1px solid rgba(233,235,232,.14);display:grid;grid-template-columns:repeat(4,1fr);">
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
+    <div id="servicesGrid" style="margin-top:64px;border-top:1px solid rgba(233,235,232,.14);display:grid;grid-template-columns:repeat(3,1fr);">
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">01</span>
         <h3 data-t="service1_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
         <p data-t="service1_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
       </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">02</span>
         <h3 data-t="service2_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
         <p data-t="service2_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
       </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">03</span>
         <h3 data-t="service3_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
         <p data-t="service3_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
       </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;transition:background .4s;">
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
         <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">04</span>
         <h3 data-t="service4_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
         <p data-t="service4_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
+      </div>
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">05</span>
+        <h3 data-t="service5_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
+        <p data-t="service5_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
+      </div>
+      <div data-reveal class="service-cell" style="padding:40px 32px 52px;display:flex;flex-direction:column;justify-content:center;transition:background .4s;">
+        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;color:#C9F7C5;display:inline-flex;align-items:center;gap:8px;">
+          <span data-t="services_cta"></span> <span>↖</span>
+        </a>
       </div>
     </div>
     <div style="height:1px;background:rgba(233,235,232,.14);"></div>
   </section>
 
   <section id="work" style="position:relative;z-index:1;padding:130px 0 0;overflow:hidden;">
-    <div style="max-width:1400px;margin:0 auto;padding:0 56px;display:flex;align-items:baseline;gap:20px;">
-      <span data-t="nav_work" data-prefix="02 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
-      <h2 data-t="work_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+    <div style="max-width:1400px;margin:0 auto;padding:0 56px;">
+      <div style="display:flex;align-items:baseline;gap:20px;">
+        <span data-t="nav_work" data-prefix="02 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
+        <h2 data-t="work_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+      </div>
+      <p data-t="work_sub" style="margin:16px 0 0;font-size:16px;line-height:1.7;opacity:.62;max-width:56ch;"></p>
     </div>
 
     <div style="position:relative;width:100%;margin-top:56px;">
@@ -246,6 +282,7 @@ a:hover{color:inherit;}
           <h3 data-t="about_name" style="font-family:'Frank Ruhl Libre',serif;font-size:40px;font-weight:400;letter-spacing:-.02em;margin:0;"></h3>
           <div data-t="about_role" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-top:10px;opacity:.62;"></div>
           <p data-t="about_bio" style="font-size:17px;line-height:1.85;margin:28px 0 0;max-width:62ch;opacity:.78;"></p>
+          <p data-t="about_why" style="font-size:15px;line-height:1.75;margin:20px 0 0;max-width:62ch;opacity:.62;"></p>
           <div style="display:flex;gap:10px;margin-top:36px;">
             <a href="https://wa.me/972549961663" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon" style="width:44px;height:44px;border:1px solid rgba(26,28,26,.24);display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 12 20a8 8 0 0 1-4-1.1z"></path></svg>
@@ -262,13 +299,14 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <section id="contact" style="position:relative;z-index:1;background:#C9F7C5;color:#0E100E;">
-    <div id="contactInner" style="max-width:1400px;margin:0 auto;padding:110px 56px;">
-      <span data-t="nav_cta" data-prefix="06 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;"></span>
-      <h2 data-t="contact_title" style="font-family:'Frank Ruhl Libre',serif;font-size:76px;font-weight:400;line-height:1.06;letter-spacing:-.03em;margin:28px 0 0;max-width:18ch;"></h2>
+  <section id="contact" style="position:relative;z-index:1;background:#C9F7C5;color:#0E100E;overflow:hidden;">
+    <div id="ctaGlow"></div>
+    <div id="contactInner" style="position:relative;max-width:1400px;margin:0 auto;padding:110px 56px;">
+      <span data-reveal-stagger style="transition-delay:.05s;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;display:inline-block;"><span data-t="nav_cta" data-prefix="06 / "></span></span>
+      <h2 data-t="contact_title" data-reveal-stagger style="transition-delay:.15s;font-family:'Frank Ruhl Libre',serif;font-size:76px;font-weight:400;line-height:1.06;letter-spacing:-.03em;margin:28px 0 0;max-width:18ch;"></h2>
       <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:end;margin-top:48px;">
-        <p data-t="contact_sub" style="font-size:19px;line-height:1.7;margin:0;max-width:52ch;opacity:.72;"></p>
-        <div style="display:flex;gap:12px;">
+        <p data-t="contact_sub" data-reveal-stagger style="transition-delay:.25s;font-size:19px;line-height:1.7;margin:0;max-width:52ch;opacity:.72;"></p>
+        <div data-reveal-stagger style="transition-delay:.4s;display:flex;gap:12px;">
           <a href="https://wa.me/972549961663" target="_blank" rel="noopener noreferrer" class="contact-dark" style="display:inline-flex;align-items:center;gap:12px;background:#0E100E;color:#C9F7C5;padding:18px 32px;font-size:16px;font-weight:600;white-space:nowrap;transition:transform .35s cubic-bezier(.2,.8,.2,1);"><span data-t="contact_cta_whatsapp"></span> <span style="font-family:'IBM Plex Mono',monospace;">↖</span></a>
           <a href="mailto:mashtatech@gmail.com" class="contact-outline" data-t="contact_cta" style="display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(14,16,14,.4);padding:18px 32px;font-size:16px;font-weight:500;white-space:nowrap;transition:background .25s,border-color .25s;"></a>
         </div>
@@ -278,6 +316,8 @@ a:hover{color:inherit;}
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer id="siteFooter" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:64px 56px 28px;display:grid;grid-template-columns:1fr auto auto;gap:80px;align-items:start;">
     <div style="max-width:300px;">
@@ -312,18 +352,22 @@ const translations = {
     dir: 'rtl', langCode: 'he', lang_toggle: 'EN',
     nav_services: 'שירותים', nav_work: 'עבודות', nav_process: 'תהליך', nav_about: 'אודות', nav_cta: 'בואו נדבר',
     location: 'תל אביב · ישראל', availability: 'פנוי לפרויקט הבא',
-    hero_kicker: 'מערכות AI · תוכנה · אתרים',
-    hero_title_a: 'מהרעיון שלך למשהו ',
-    hero_title_mark: 'שעובד',
+    tech_label: 'נבנה עם טכנולוגיה מודרנית ·',
+    hero_kicker: 'פיתוח אתרים ומערכות · פתרונות AI',
+    hero_title_a: 'פתרונות דיגיטליים ',
+    hero_title_mark: 'שנבנו בדיוק עבורכם',
     hero_title_b: '.',
-    hero_sub: 'אתרים, מערכות, אוטומציות ופתרונות AI — מתכנון ועד מוצר עובד, בהתאמה למה שהעסק שלך באמת צריך.',
+    hero_sub: 'אתרים מקצועיים, מערכות חכמות ואוטומציות שעובדות — כולל שילוב AI, בהתאמה למה שהעסק שלכם באמת צריך.',
     hero_cta_primary: 'להתחיל פרויקט', hero_cta_secondary: 'לצפייה בעבודות',
-    services_title: 'מה אני בונה',
-    service1_title: 'מערכות AI ואוטומציה', service1_body: 'עוזרים חכמים, סוכנים ותהליכים אוטומטיים שמורידים עבודה ידנית מהשולחן שלכם.',
-    service2_title: 'כלים ומערכות לעסק', service2_body: 'פורטלים, מערכות הזמנות וכלים פנימיים שנבנים סביב הדרך שבה אתם באמת עובדים.',
-    service3_title: 'אתרים ודפי נחיתה', service3_body: 'אתרים מהירים וממירים — לקמפיינים, להשקות ולנוכחות דיגיטלית שנשארת.',
-    service4_title: 'מוצר מקצה לקצה', service4_body: 'מהרעיון לאוויר: אפיון, עיצוב, פיתוח, השקה וליווי בשבועות הראשונים.',
+    services_title: 'במה אני יכול לעזור',
+    service1_title: 'עיצוב ופיתוח אתרים', service1_body: 'אתרים מודרניים, מהירים ומותאמים לנייד שיוצרים נוכחות מקצועית ברשת והופכים מבקרים ללקוחות.',
+    service2_title: 'מערכות ווב מותאמות אישית', service2_body: 'דשבורדים, פורטלים ומערכות ניהול שנבנים סביב הדרך שבה העסק שלכם באמת עובד.',
+    service3_title: 'פתרונות AI', service3_body: 'שילוב יכולות AI במוצר שלכם — עוזרים חכמים, סוכנים ותהליכים חכמים יותר שפותרים בעיות אמיתיות.',
+    service4_title: 'אוטומציה עסקית', service4_body: 'אוטומציה של תהליכים חוזרים וחיבור בין מערכות, כדי לחסוך זמן ולתפעל את העסק ביעילות.',
+    service5_title: 'Backend ובסיסי נתונים', service5_body: 'מערכות Backend מאובטחות וסקיילביליות, בסיסי נתונים ואינטגרציות שהמוצר שלכם נשען עליהן.',
+    services_cta: 'יש לכם משהו אחר בראש? בואו נדבר',
     work_title: 'עבודות נבחרות',
+    work_sub: 'פרויקטים אמיתיים שבנוי ומופעלים היום. לחצו על כרטיס כדי לעבור לפרויקט הפעיל, ולחצו שוב כדי לבקר באתר החי.',
     testimonials_label: 'המלצות', testimonials_title: 'מה אומרים עליי',
     process_title: 'איך זה עובד',
     step1_title: 'גילוי', step1_body: 'ממפים מטרות, קהל ותוכן — לפני שנוגעים בפיקסל אחד.',
@@ -341,6 +385,7 @@ const translations = {
     about_section_title: 'מי בונה את זה',
     about_name: 'יניר משטא', about_role: 'מייסד, Mashtech',
     about_bio: 'בנייה היא חלק בלתי נפרד ממי שאני. מה שהתחיל כסקרנות לטכנולוגיה התחזק במהלך השירות שלי בתחום הסייבר, והתפתח לתשוקה ליצירת תוכנה מבוססת AI וחוויות דיגיטליות שפותרות בעיות אמיתיות. אני מתמחה בפתרונות מותאמים אישית שמשלבים עיצוב מדויק, טכנולוגיה מתקדמת וערך עסקי מעשי. בין אם זו פלטפורמת אוטומציה חכמה, אתר ממיר או מוצר שאפתני כמו Lifemaxing — המטרה תמיד אחת: לבנות תוכנה שאנשים באמת נהנים להשתמש בה, ושעוזרת לעסקים לצמוח.',
+    about_why: 'עובד ישיר מול לקוח אחד לפרויקט — בלי שכבות תיווך, בלי אנשי מכירות. אתם מדברים ישירות עם מי שבונה, מהאפיון הראשוני ועד התחזוקה אחרי ההשקה.',
     contact_title: 'יש לכם משהו לבנות?', contact_sub: 'ספרו לי מה אתם בונים ולאן זה אמור להגיע — אחזור אליכם תוך יום עם הצעדים הבאים.',
     contact_cta: 'שלחו מייל', contact_cta_whatsapp: 'דברו איתי בוואטסאפ',
     fab_label: 'דברו איתי',
@@ -348,24 +393,29 @@ const translations = {
     footer_studio_label: 'סטודיו', footer_contact_label: 'צור קשר',
     copyright: '© 2026 Mashtech — כל הזכויות שמורות',
     status_paused: 'מושהה', status_auto: 'אוטומטי',
-    photo_placeholder: 'תמונת הלקוח', quote_placeholder: 'ממתין לציטוט אמיתי'
+    photo_placeholder: 'תמונת הלקוח', quote_placeholder: 'ממתין לציטוט אמיתי',
+    aria_visit_project: 'לביקור בפרויקט'
   },
   en: {
     dir: 'ltr', langCode: 'en', lang_toggle: 'עב',
     nav_services: 'Services', nav_work: 'Work', nav_process: 'Process', nav_about: 'About', nav_cta: "Let's talk",
     location: 'Tel Aviv · IL', availability: 'Open for the next project',
-    hero_kicker: 'AI systems · software · web',
-    hero_title_a: 'From your idea to something ',
-    hero_title_mark: 'that works',
+    tech_label: 'Built with modern technology ·',
+    hero_kicker: 'Web & software development · AI solutions',
+    hero_title_a: 'Digital solutions ',
+    hero_title_mark: 'built exactly for you',
     hero_title_b: '.',
-    hero_sub: 'Websites, systems, automations and AI solutions — from planning to a working product, tailored to what your business actually needs.',
+    hero_sub: 'Professional websites, smart systems and automations that work — including AI, tailored to what your business actually needs.',
     hero_cta_primary: 'Start a project', hero_cta_secondary: 'See the work',
-    services_title: 'What I build',
-    service1_title: 'AI systems & automation', service1_body: 'Assistants, agents and automated workflows that take manual work off your desk.',
-    service2_title: 'Business tools & portals', service2_body: 'Portals, booking systems and internal tools built around how you actually work.',
-    service3_title: 'Websites & landing pages', service3_body: 'Fast, high-converting sites — for campaigns, launches and a presence that lasts.',
-    service4_title: 'End-to-end product', service4_body: 'Idea to live: scoping, design, development, launch and the first weeks after.',
+    services_title: 'How I can help',
+    service1_title: 'Web Design & Development', service1_body: 'Modern, fast and responsive websites designed to create a professional online presence and convert visitors into customers.',
+    service2_title: 'Custom Web Applications', service2_body: 'Dashboards, portals and management systems built around your specific workflow, not a generic template.',
+    service3_title: 'AI Solutions', service3_body: 'Integrate AI capabilities using modern AI technologies to create smarter products, assistants and workflows.',
+    service4_title: 'Business Automation', service4_body: 'Automate repetitive processes and connect systems to help your business save time and operate more efficiently.',
+    service5_title: 'Backend & Database Development', service5_body: 'Secure, scalable backend systems, databases and integrations that your product can rely on.',
+    services_cta: 'Have something else in mind? Let\'s talk',
     work_title: 'Selected work',
+    work_sub: 'Real, live projects. Click a card to bring it into focus, click again to visit the live site.',
     testimonials_label: 'Testimonials', testimonials_title: 'What clients say',
     process_title: 'How it runs',
     step1_title: 'Discover', step1_body: 'We map goals, audience and content before a single pixel is drawn.',
@@ -383,6 +433,7 @@ const translations = {
     about_section_title: 'Who builds it',
     about_name: 'Yanir Mashta', about_role: 'Founder, Mashtech',
     about_bio: "Building has always been at the core of who I am. What started as a curiosity for technology grew stronger through my military service in cybersecurity and evolved into a passion for creating AI-powered software and digital experiences that solve real problems. I specialise in custom solutions that combine careful design, modern technology and practical business value. Whether it's an intelligent automation platform, a high-converting website, or an ambitious product like Lifemaxing, the goal is always the same: build software people genuinely enjoy using, and that helps businesses grow.",
+    about_why: "You work directly with the person building your project — no account managers, no handoffs. From the first conversation to post-launch support, it's a direct line to the person who wrote the code.",
     contact_title: 'Have something to build?', contact_sub: "Tell me what you're building and where it needs to get to — I'll come back within a day with the next steps.",
     contact_cta: 'Email me', contact_cta_whatsapp: 'Chat on WhatsApp',
     fab_label: 'Chat with me',
@@ -390,7 +441,8 @@ const translations = {
     footer_studio_label: 'Studio', footer_contact_label: 'Contact',
     copyright: '© 2026 Mashtech — All rights reserved',
     status_paused: 'Paused', status_auto: 'Auto',
-    photo_placeholder: 'Client photo', quote_placeholder: 'Awaiting a real quote'
+    photo_placeholder: 'Client photo', quote_placeholder: 'Awaiting a real quote',
+    aria_visit_project: 'Visit'
   }
 };
 
@@ -526,9 +578,16 @@ function renderCards() {
     const url = tr[it.key + '_url'];
     const card = document.createElement('div');
     card.style.cssText = workCardCss(o);
-    card.addEventListener('click', () => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', active ? '0' : '-1');
+    card.setAttribute('aria-label', active ? (tr.aria_visit_project || 'Visit') + ' ' + tr[it.key + '_name'] : tr[it.key + '_name']);
+    const activate = () => {
       if (!active) { progressVal = 0; index = i; render(); }
       else window.open(url, '_blank', 'noopener,noreferrer');
+    };
+    card.addEventListener('click', activate);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
     });
 
     const sheenOpacity = active ? 1 : 0;
@@ -614,6 +673,8 @@ function applyTilt() {
 function render() {
   rootEl.setAttribute('dir', t().dir);
   rootEl.setAttribute('lang', t().langCode);
+  document.documentElement.setAttribute('dir', t().dir);
+  document.documentElement.setAttribute('lang', t().langCode);
   applyTranslations();
   renderCards();
   renderDots();
@@ -662,6 +723,11 @@ function onScroll() {
       el.style.transform = 'translateY(0)';
     }
   });
+  document.querySelectorAll('[data-reveal-stagger]').forEach((el) => {
+    if (el.getBoundingClientRect().top < line) el.classList.add('is-in');
+  });
+  const glow = document.getElementById('ctaGlow');
+  if (glow && glow.getBoundingClientRect().top < line) glow.classList.add('is-in');
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 
