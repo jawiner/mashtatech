@@ -430,10 +430,12 @@ function offsetOfWork(i) {
   return o;
 }
 
+const mobileMq = window.matchMedia('(max-width: 760px)');
+
 function workCardCss(o) {
   const s = o < 0 ? -1 : 1;
   const a = Math.abs(o);
-  const isMobile = window.innerWidth <= 760;
+  const isMobile = mobileMq.matches;
   const w = isMobile ? Math.min(360, window.innerWidth - 64) : 560;
   const h = Math.round(w * (372 / 560));
   const depthUnit = isMobile ? w * 0.7 : 220;
@@ -834,9 +836,15 @@ setInterval(() => {
 })();
 
 let resizeTimer;
-window.addEventListener('resize', () => {
+function scheduleCardsResize() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(renderCards, 150);
+}
+window.addEventListener('resize', scheduleCardsResize);
+window.addEventListener('orientationchange', () => {
+  renderCards();
+  setTimeout(renderCards, 100);
+  setTimeout(renderCards, 400);
 });
 
 render();
