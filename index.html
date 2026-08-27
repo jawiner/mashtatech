@@ -38,6 +38,48 @@ a:hover{color:inherit;}
 .contact-outline:hover{background:#0E100E;border-color:#0E100E;color:#C9F7C5;}
 .fab:hover{transform:scale(1.07);}
 [data-reveal]{transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);}
+
+@media (max-width: 760px) {
+  #navLinks{display:none !important;}
+  #nav{padding:16px 20px !important;gap:16px !important;}
+  #top{padding:96px 20px 56px !important;}
+  #top h1{font-size:38px !important;margin-top:22px !important;}
+  #top p{font-size:16px !important;}
+  #top [data-reveal]:last-child > div{flex-direction:column !important;align-items:stretch !important;}
+  #top [data-reveal]:last-child a{justify-content:center !important;}
+  #techStrip{padding:14px 20px !important;gap:20px !important;overflow-x:auto !important;white-space:nowrap !important;font-size:11px !important;}
+  #techStrip span:last-child{margin-inline-start:0 !important;}
+  #services{padding:72px 20px 0 !important;}
+  #process{padding:72px 20px 0 !important;}
+  #work{padding-top:72px !important;}
+  #work > div:first-child{padding:0 20px !important;}
+  #aboutInner{padding:56px 20px !important;}
+  #contactInner{padding:56px 20px !important;}
+  #siteFooter{padding:48px 20px 20px !important;}
+  #copyrightWrap{padding:0 20px 32px !important;}
+  #services h2, #work h2, #process h2, #about h2{font-size:28px !important;}
+  #services > div[style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr !important;}
+  #services > div[style*="grid-template-columns:repeat(4"] > div{border-inline-end:none !important;border-bottom:1px solid rgba(233,235,232,.14);}
+  #tiltZone{height:300px !important;perspective:none !important;}
+  #testimonialsSection{margin-top:72px !important;padding:0 20px !important;}
+  #testimonialsSection > div[style*="grid-template-columns:300px"]{grid-template-columns:1fr !important;}
+  #testimonialsSection > div[style*="grid-template-columns:300px"] > div:first-child{border-inline-end:none !important;border-bottom:1px solid rgba(233,235,232,.14);padding-inline-end:0 !important;}
+  #testimonialsSection > div[style*="grid-template-columns:300px"] > div:last-child{padding-inline-start:0 !important;}
+  #testimonialsSection p[style*="font-size:30px"]{font-size:22px !important;}
+  #stepsWrap{grid-template-columns:1fr !important;row-gap:40px !important;}
+  #stepsWrap > div[style*="top:244px"]{display:none !important;}
+  #stepsContainer > div{cursor:default !important;}
+  #about h2{font-size:26px !important;}
+  #aboutInner > div[style*="grid-template-columns:minmax(0,1.05fr)"]{grid-template-columns:1fr !important;}
+  #aboutInner > div[style*="grid-template-columns:minmax(0,1.05fr)"] > div:first-child{border-inline-end:none !important;padding-inline-end:0 !important;padding-bottom:28px !important;}
+  #aboutInner > div[style*="grid-template-columns:minmax(0,1.05fr)"] > div:last-child{padding-inline-start:0 !important;padding-top:28px !important;border-top:1px solid rgba(26,28,26,.14);}
+  #about h3{font-size:28px !important;}
+  #contact h2{font-size:38px !important;}
+  #contactInner > div[style*="grid-template-columns:minmax(0,1fr) auto"]{grid-template-columns:1fr !important;gap:24px !important;}
+  #contactInner > div[style*="grid-template-columns:minmax(0,1fr) auto"] > div:last-child{flex-direction:column !important;align-items:stretch !important;}
+  #contactInner > div:last-child{flex-wrap:wrap !important;gap:10px 24px !important;}
+  #siteFooter{grid-template-columns:1fr !important;gap:32px !important;}
+}
 </style>
 </head>
 <body>
@@ -50,7 +92,7 @@ a:hover{color:inherit;}
     <a href="#top" style="font-family:'Playfair Display',serif;font-size:23px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:10px;">
       <span style="width:7px;height:7px;background:#C9F7C5;display:inline-block;animation:mBlink 3.4s ease-in-out infinite;"></span>Mashtech
     </a>
-    <div style="display:flex;gap:30px;font-size:14px;font-weight:400;opacity:.72;margin-inline-start:8px;">
+    <div id="navLinks" style="display:flex;gap:30px;font-size:14px;font-weight:400;opacity:.72;margin-inline-start:8px;">
       <a href="#services" class="hoverline" data-t="nav_services" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
       <a href="#work" class="hoverline" data-t="nav_work" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
       <a href="#process" class="hoverline" data-t="nav_process" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
@@ -83,7 +125,7 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <div style="position:relative;z-index:1;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;">
+  <div id="techStrip" style="position:relative;z-index:1;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;">
     <span>React</span><span>Next.js</span><span>Claude / OpenAI</span><span>Supabase</span><span>Vercel</span>
     <span id="location" style="margin-inline-start:auto;"></span>
   </div>
@@ -191,7 +233,7 @@ a:hover{color:inherit;}
   </section>
 
   <section id="about" style="position:relative;z-index:1;background:#EAEAE7;color:#1A1C1A;margin-top:130px;">
-    <div style="max-width:1400px;margin:0 auto;padding:110px 56px;">
+    <div id="aboutInner" style="max-width:1400px;margin:0 auto;padding:110px 56px;">
       <div style="display:flex;align-items:baseline;gap:20px;">
         <span data-t="nav_about" data-prefix="05 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.62;"></span>
         <h2 data-t="about_section_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:400;letter-spacing:-.02em;margin:0;"></h2>
@@ -221,7 +263,7 @@ a:hover{color:inherit;}
   </section>
 
   <section id="contact" style="position:relative;z-index:1;background:#C9F7C5;color:#0E100E;">
-    <div style="max-width:1400px;margin:0 auto;padding:110px 56px;">
+    <div id="contactInner" style="max-width:1400px;margin:0 auto;padding:110px 56px;">
       <span data-t="nav_cta" data-prefix="06 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;"></span>
       <h2 data-t="contact_title" style="font-family:'Frank Ruhl Libre',serif;font-size:76px;font-weight:400;line-height:1.06;letter-spacing:-.03em;margin:28px 0 0;max-width:18ch;"></h2>
       <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:end;margin-top:48px;">
@@ -237,7 +279,7 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <footer style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:64px 56px 28px;display:grid;grid-template-columns:1fr auto auto;gap:80px;align-items:start;">
+  <footer id="siteFooter" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:64px 56px 28px;display:grid;grid-template-columns:1fr auto auto;gap:80px;align-items:start;">
     <div style="max-width:300px;">
       <span style="font-family:'Playfair Display',serif;font-size:23px;font-weight:600;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:10px;"><span style="width:7px;height:7px;background:#C9F7C5;display:inline-block;"></span>Mashtech</span>
       <p data-t="footer_tagline" style="font-size:14px;line-height:1.7;opacity:.55;margin:14px 0 0;"></p>
@@ -255,7 +297,7 @@ a:hover{color:inherit;}
       <a href="https://wa.me/972549961663" target="_blank" rel="noopener noreferrer" class="footer-link" style="opacity:.75;transition:color .25s,opacity .25s;">WhatsApp</a>
     </div>
   </footer>
-  <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 56px 40px;">
+  <div id="copyrightWrap" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 56px 40px;">
     <div id="copyright" style="border-top:1px solid rgba(233,235,232,.12);padding-top:20px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;"></div>
   </div>
 
@@ -391,21 +433,25 @@ function offsetOfWork(i) {
 function workCardCss(o) {
   const s = o < 0 ? -1 : 1;
   const a = Math.abs(o);
+  const isMobile = window.innerWidth <= 760;
+  const w = isMobile ? Math.min(360, window.innerWidth - 64) : 560;
+  const h = Math.round(w * (372 / 560));
+  const depthUnit = isMobile ? w * 0.7 : 220;
   let transform, opacity, filter, zIndex, boxShadow;
   if (a === 0) {
     transform = 'translate3d(0,0,0) rotateY(0deg) scale(1)'; opacity = 1; filter = 'none'; zIndex = 40;
     boxShadow = '0 40px 80px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(233,235,232,.10)';
   } else if (a === 1) {
-    transform = 'translate3d(' + (s * 61) + '%, 8px, -220px) rotateY(' + (-s * 19) + 'deg) scale(.97)';
+    transform = 'translate3d(' + (s * 61) + '%, 8px, -' + Math.round(depthUnit) + 'px) rotateY(' + (-s * 19) + 'deg) scale(.97)';
     opacity = .5; filter = 'blur(2px)'; zIndex = 30;
     boxShadow = '0 28px 56px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(233,235,232,.06)';
   } else if (a === 2) {
-    transform = 'translate3d(' + (s * 102) + '%, 14px, -440px) rotateY(' + (-s * 23) + 'deg) scale(.94)';
+    transform = 'translate3d(' + (s * 102) + '%, 14px, -' + Math.round(depthUnit * 2) + 'px) rotateY(' + (-s * 23) + 'deg) scale(.94)';
     opacity = .16; filter = 'blur(5px)'; zIndex = 20; boxShadow = 'none';
   } else {
-    transform = 'translate3d(' + (s * 130) + '%, 0, -660px) scale(.9)'; opacity = 0; zIndex = 10; boxShadow = 'none';
+    transform = 'translate3d(' + (s * 130) + '%, 0, -' + Math.round(depthUnit * 3) + 'px) scale(.9)'; opacity = 0; zIndex = 10; boxShadow = 'none';
   }
-  return `position:absolute; left:50%; top:50%; width:560px; height:372px; margin-left:-280px; margin-top:-186px; transform-style:preserve-3d; cursor:pointer; transition:transform 1s cubic-bezier(.16,1,.3,1), opacity .9s cubic-bezier(.16,1,.3,1), filter .9s ease, box-shadow .9s ease; transform:${transform}; opacity:${opacity}; filter:${filter}; z-index:${zIndex}; box-shadow:${boxShadow};`;
+  return `position:absolute; left:50%; top:50%; width:${w}px; height:${h}px; margin-left:-${w / 2}px; margin-top:-${h / 2}px; transform-style:preserve-3d; cursor:pointer; transition:transform 1s cubic-bezier(.16,1,.3,1), opacity .9s cubic-bezier(.16,1,.3,1), filter .9s ease, box-shadow .9s ease; transform:${transform}; opacity:${opacity}; filter:${filter}; z-index:${zIndex}; box-shadow:${boxShadow};`;
 }
 
 function goWork(d) {
@@ -786,6 +832,12 @@ setInterval(() => {
   }
   requestAnimationFrame(loop);
 })();
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(renderCards, 150);
+});
 
 render();
 renderSteps();
