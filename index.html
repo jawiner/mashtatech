@@ -18,7 +18,9 @@
 <link rel="icon" type="image/png" href="assets/favicon-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Frank+Ruhl+Libre:wght@300;400&family=Assistant:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=optional">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Frank+Ruhl+Libre:wght@300;400&family=Assistant:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Frank+Ruhl+Libre:wght@300;400&family=Assistant:wght@200;300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=optional" rel="stylesheet"></noscript>
 <style>
 body{margin:0;background:#0E100E;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
@@ -48,6 +50,12 @@ a:hover{color:inherit;}
 .contact-dark:hover{transform:translateY(-2px);}
 .contact-outline:hover{background:#0E100E;border-color:#0E100E;color:#C9F7C5;}
 .fab:hover{transform:scale(1.07);}
+.pricing-card:hover{border-color:rgba(201,247,197,.5);}
+.pricing-card-popular:hover{transform:scale(1.08);}
+.pricing-btn:hover{border-color:#C9F7C5;background:#C9F7C5;color:#0E100E;}
+.pricing-btn-popular:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,247,197,.3);}
+.service-panel-img{transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1.1s ease;}
+.service-panel.is-active .service-panel-img{transform:scale(1);opacity:.62;}
 [data-reveal]{transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);}
 [data-reveal-stagger]{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1);}
 [data-reveal-stagger].is-in{opacity:1;transform:translateY(0);}
@@ -62,7 +70,7 @@ a:hover{color:inherit;}
 @media (max-width: 760px) {
   #navLinks{display:none !important;}
   #nav{padding:16px 20px !important;gap:16px !important;}
-  #top{padding:96px 20px 56px !important;}
+  #top{padding:96px 20px 56px !important;min-height:0 !important;display:block !important;}
   #top h1{font-size:38px !important;margin-top:22px !important;}
   #top p{font-size:16px !important;}
   #top [data-reveal]:last-child > div{flex-direction:column !important;align-items:stretch !important;}
@@ -71,15 +79,26 @@ a:hover{color:inherit;}
   #techStrip span:last-child{margin-inline-start:0 !important;}
   #services{padding:72px 20px 0 !important;}
   #process{padding:72px 20px 0 !important;}
+  #pricing{padding:72px 20px 80px !important;}
+  #pricing > div{padding:0 !important;}
   #work{padding-top:72px !important;}
   #work > div:first-child{padding:0 20px !important;}
   #aboutInner{padding:56px 20px !important;}
   #contactInner{padding:56px 20px !important;}
   #siteFooter{padding:48px 20px 20px !important;}
   #copyrightWrap{padding:0 20px 32px !important;}
-  #services h2, #work h2, #process h2, #about h2{font-size:28px !important;}
-  #servicesGrid{grid-template-columns:1fr !important;}
-  #servicesGrid > div{border-inline-end:none !important;border-bottom:1px solid rgba(233,235,232,.14);}
+  #services h2, #work h2, #process h2, #pricing h2, #faq h2, #about h2{font-size:28px !important;}
+  .service-panel{height:100vh !important;}
+  .service-panel > div[style*="max-width:1400px"]{padding:0 20px !important;}
+  .service-panel h3{font-size:28px !important;}
+  .service-panel p{font-size:15px !important;}
+  #pricingGrid{grid-template-columns:1fr !important;gap:20px !important;}
+  .pricing-card-popular{transform:none !important;order:-1;}
+  .pricing-card-popular:hover{transform:none !important;}
+  #faq{padding:72px 0 80px !important;}
+  #faq > div{padding:0 20px !important;}
+  #faqList{grid-template-columns:1fr !important;}
+  #faqList button{font-size:18px !important;}
   #tiltZone{height:300px !important;perspective:none !important;}
   #testimonialsSection{margin-top:72px !important;padding:0 20px !important;}
   #testimonialsSection > div[style*="grid-template-columns:300px"]{grid-template-columns:1fr !important;}
@@ -117,6 +136,8 @@ a:hover{color:inherit;}
       <a href="#services" class="hoverline" data-t="nav_services" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
       <a href="#work" class="hoverline" data-t="nav_work" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
       <a href="#process" class="hoverline" data-t="nav_process" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
+      <a href="#pricing" class="hoverline" data-t="nav_pricing" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
+      <a href="#faq" class="hoverline" data-t="nav_faq" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
       <a href="#about" class="hoverline" data-t="nav_about" style="padding-bottom:3px;border-bottom:1px solid transparent;transition:color .25s,border-color .25s;"></a>
     </div>
     <div style="margin-inline-start:auto;display:flex;align-items:center;gap:18px;">
@@ -126,15 +147,23 @@ a:hover{color:inherit;}
   </nav>
 
   <main id="main">
-  <section id="top" style="position:relative;z-index:1;padding:118px 56px 92px;overflow:hidden;">
+  <div id="heroPin" style="position:relative;">
+  <section id="top" style="position:sticky;top:0;z-index:1;min-height:100vh;display:flex;align-items:center;padding:118px 56px 92px;overflow:hidden;box-sizing:border-box;">
+    <div id="heroVideoWrap" aria-hidden="true" style="position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;">
+      <img id="heroPoster" src="assets/video/hero-poster.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34;">
+      <video id="heroVideo" muted loop playsinline preload="none" poster="assets/video/hero-poster.webp" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;">
+        <source data-src="assets/video/hero.mp4" type="video/mp4">
+      </video>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,16,14,.55),rgba(14,16,14,.82) 60%,#0E100E 100%);"></div>
+    </div>
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(12,1fr);">
       <span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span><span style="border-inline-start:1px solid rgba(233,235,232,.045);"></span>
     </div>
-    <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;">
+    <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;">
       <div data-reveal style="display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;">
         <span style="width:6px;height:6px;background:#C9F7C5;display:inline-block;"></span><span data-t="hero_kicker"></span>
       </div>
-      <h1 data-reveal style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:74px;line-height:1.1;letter-spacing:-.02em;margin:34px 0 0;max-width:20ch;">
+      <h1 data-reveal style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:88px;line-height:1.08;letter-spacing:-.02em;margin:34px 0 0;max-width:20ch;">
         <span id="heroTitleA"></span><span style="white-space:nowrap;"><span style="position:relative;display:inline-block;"><span style="position:absolute;inset-inline-start:-10px;inset-inline-end:-10px;bottom:.1em;height:.76em;background:#C9F7C5;z-index:0;"></span><span id="heroTitleMark" style="position:relative;z-index:1;color:#0E100E;"></span></span></span> <span id="heroTitleB"></span>
       </h1>
       <div data-reveal style="margin-top:54px;">
@@ -147,63 +176,95 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <div id="techStrip" style="position:relative;z-index:1;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;align-items:center;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;">
+  <div id="techStrip" style="position:relative;z-index:2;background:#0E100E;border-top:1px solid rgba(233,235,232,.12);border-bottom:1px solid rgba(233,235,232,.12);padding:20px 56px;display:flex;align-items:center;gap:52px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;">
     <span data-t="tech_label" style="color:#C9F7C5;opacity:.9;"></span>
-    <span>React</span><span>Next.js</span><span>Claude / OpenAI</span><span>Supabase</span><span>Vercel</span>
-    <span id="location" style="margin-inline-start:auto;"></span>
+    <span style="opacity:.55;">React</span><span style="opacity:.55;">Next.js</span><span style="opacity:.55;">Claude / OpenAI</span><span style="opacity:.55;">Supabase</span><span style="opacity:.55;">Vercel</span>
+    <span id="location" style="margin-inline-start:auto;opacity:.55;"></span>
   </div>
 
-  <section id="services" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:130px 56px 0;">
-    <div data-reveal style="display:flex;align-items:baseline;gap:20px;">
-      <span data-t="nav_services" data-prefix="01 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
-      <h2 data-t="services_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
-    </div>
-    <div id="servicesGrid" style="margin-top:64px;border-top:1px solid rgba(233,235,232,.14);display:grid;grid-template-columns:repeat(3,1fr);">
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">01</span>
-        <h3 data-t="service1_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
-        <p data-t="service1_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
-      </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">02</span>
-        <h3 data-t="service2_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
-        <p data-t="service2_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
-      </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-bottom:1px solid rgba(233,235,232,.14);transition:background .4s;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">03</span>
-        <h3 data-t="service3_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
-        <p data-t="service3_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
-      </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">04</span>
-        <h3 data-t="service4_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
-        <p data-t="service4_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
-      </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;border-inline-end:1px solid rgba(233,235,232,.14);transition:background .4s;">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:#C9F7C5;">05</span>
-        <h3 data-t="service5_title" style="font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:400;margin:22px 0 0;letter-spacing:-.01em;"></h3>
-        <p data-t="service5_body" style="font-size:15px;line-height:1.75;opacity:.62;margin:14px 0 0;"></p>
-      </div>
-      <div data-reveal class="service-cell" style="padding:40px 32px 52px;display:flex;flex-direction:column;justify-content:center;transition:background .4s;">
-        <a href="#contact" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;color:#C9F7C5;display:inline-flex;align-items:center;gap:8px;">
-          <span data-t="services_cta"></span> <span>↖</span>
-        </a>
+  <section id="services" style="position:relative;z-index:1;background:#0E100E;">
+    <div style="max-width:1400px;margin:0 auto;padding:160px 56px 0;">
+      <div data-reveal style="display:flex;align-items:baseline;gap:20px;">
+        <span data-t="nav_services" data-prefix="01 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
+        <h2 data-t="services_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
       </div>
     </div>
-    <div style="height:1px;background:rgba(233,235,232,.14);"></div>
+    <div id="servicesStack" style="position:relative;margin-top:64px;">
+      <div class="service-panel" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E100E;">
+        <img class="service-panel-img" src="assets/villa-el-nof.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);opacity:.4;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E100E 18%,rgba(14,16,14,.45) 55%,rgba(14,16,14,.75) 100%);"></div>
+        <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;padding:0 56px;">
+          <div style="max-width:44ch;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#C9F7C5;">01</span>
+            <h3 data-t="service1_title" style="font-family:'Frank Ruhl Libre',serif;font-size:44px;font-weight:300;margin:20px 0 0;letter-spacing:-.02em;"></h3>
+            <p data-t="service1_body" style="font-size:17px;line-height:1.75;opacity:.72;margin:20px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="service-panel" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E100E;">
+        <img class="service-panel-img" src="assets/talentflow.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);opacity:.4;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E100E 18%,rgba(14,16,14,.45) 55%,rgba(14,16,14,.75) 100%);"></div>
+        <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;padding:0 56px;">
+          <div style="max-width:44ch;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#C9F7C5;">02</span>
+            <h3 data-t="service2_title" style="font-family:'Frank Ruhl Libre',serif;font-size:44px;font-weight:300;margin:20px 0 0;letter-spacing:-.02em;"></h3>
+            <p data-t="service2_body" style="font-size:17px;line-height:1.75;opacity:.72;margin:20px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="service-panel" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E100E;">
+        <img class="service-panel-img" src="assets/lifemaxing.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);opacity:.4;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E100E 18%,rgba(14,16,14,.45) 55%,rgba(14,16,14,.75) 100%);"></div>
+        <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;padding:0 56px;">
+          <div style="max-width:44ch;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#C9F7C5;">03</span>
+            <h3 data-t="service3_title" style="font-family:'Frank Ruhl Libre',serif;font-size:44px;font-weight:300;margin:20px 0 0;letter-spacing:-.02em;"></h3>
+            <p data-t="service3_body" style="font-size:17px;line-height:1.75;opacity:.72;margin:20px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="service-panel" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E100E;">
+        <img class="service-panel-img" src="assets/pizza-mashta.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);opacity:.4;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E100E 18%,rgba(14,16,14,.45) 55%,rgba(14,16,14,.75) 100%);"></div>
+        <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;padding:0 56px;">
+          <div style="max-width:44ch;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#C9F7C5;">04</span>
+            <h3 data-t="service4_title" style="font-family:'Frank Ruhl Libre',serif;font-size:44px;font-weight:300;margin:20px 0 0;letter-spacing:-.02em;"></h3>
+            <p data-t="service4_body" style="font-size:17px;line-height:1.75;opacity:.72;margin:20px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="service-panel" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:#0E100E;">
+        <img class="service-panel-img" src="assets/villa-el-nof.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);opacity:.4;">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0E100E 18%,rgba(14,16,14,.45) 55%,rgba(14,16,14,.75) 100%);"></div>
+        <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;width:100%;box-sizing:border-box;padding:0 56px;">
+          <div style="max-width:44ch;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;color:#C9F7C5;">05</span>
+            <h3 data-t="service5_title" style="font-family:'Frank Ruhl Libre',serif;font-size:44px;font-weight:300;margin:20px 0 0;letter-spacing:-.02em;"></h3>
+            <p data-t="service5_body" style="font-size:17px;line-height:1.75;opacity:.72;margin:20px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;background:#0E100E;max-width:1400px;margin:0 auto;padding:80px 56px 120px;text-align:center;">
+      <a href="#contact" class="hoverline" style="font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.08em;color:#C9F7C5;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(201,247,197,.4);padding-bottom:4px;">
+        <span data-t="services_cta"></span> <span>↖</span>
+      </a>
+    </div>
   </section>
+  </div>
 
-  <section id="work" style="position:relative;z-index:1;padding:130px 0 0;overflow:hidden;">
+  <section id="work" style="position:relative;z-index:1;padding:160px 0 0;overflow:hidden;">
     <div style="max-width:1400px;margin:0 auto;padding:0 56px;">
       <div style="display:flex;align-items:baseline;gap:20px;">
         <span data-t="nav_work" data-prefix="02 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
-        <h2 data-t="work_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+        <h2 data-t="work_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
       </div>
       <p data-t="work_sub" style="margin:16px 0 0;font-size:16px;line-height:1.7;opacity:.62;max-width:56ch;"></p>
     </div>
 
-    <div style="position:relative;width:100%;margin-top:56px;">
-      <div id="tiltZone" style="position:relative;width:100%;height:440px;perspective:1700px;perspective-origin:50% 45%;">
+    <div style="position:relative;width:100%;margin-top:72px;">
+      <div id="tiltZone" style="position:relative;width:100%;height:560px;perspective:1700px;perspective-origin:50% 45%;">
         <div id="tiltInner" style="position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.22,1,.36,1);">
           <div id="cardsContainer"></div>
         </div>
@@ -255,28 +316,91 @@ a:hover{color:inherit;}
     </div>
   </section>
 
-  <section id="process" style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:130px 56px 0;overflow:hidden;">
+  <section id="process" style="position:relative;z-index:1;background:#0E100E;padding:160px 0 40px;overflow:hidden;">
+    <div style="max-width:1400px;margin:0 auto;padding:0 56px;">
     <div style="display:flex;align-items:baseline;gap:20px;">
       <span data-t="nav_process" data-prefix="04 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
-      <h2 data-t="process_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+      <h2 data-t="process_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
     </div>
 
-    <div id="stepsWrap" style="position:relative;margin-top:64px;padding-bottom:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:36px;align-items:start;">
+    <div id="stepsWrap" style="position:relative;margin-top:88px;padding-bottom:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:36px;align-items:start;">
       <div style="position:absolute;top:244px;left:0;right:0;height:1px;background:rgba(233,235,232,.14);"></div>
       <div id="spineFill" style="position:absolute;top:244px;inset-inline-start:0;height:1px;background:#C9F7C5;width:25%;transition:width 1.2s cubic-bezier(.2,.8,.2,1);"></div>
       <div id="stepsContainer" style="display:contents;"></div>
     </div>
+    </div>
   </section>
 
-  <section id="about" style="position:relative;z-index:1;background:#EAEAE7;color:#1A1C1A;margin-top:130px;">
-    <div id="aboutInner" style="max-width:1400px;margin:0 auto;padding:110px 56px;">
+  <section id="pricing" style="position:relative;z-index:1;background:#0E100E;padding:160px 0 200px;">
+    <div style="max-width:1400px;margin:0 auto;padding:0 56px;">
+    <div data-reveal style="text-align:center;">
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:20px;">
+        <span data-t="nav_pricing" data-prefix="05 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
+        <h2 data-t="pricing_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+      </div>
+      <p data-t="pricing_sub" style="margin:16px auto 0;font-size:16px;line-height:1.7;opacity:.62;max-width:56ch;"></p>
+    </div>
+
+    <div id="pricingGrid" style="margin-top:88px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:center;">
+      <div data-reveal class="pricing-card" style="padding:40px 32px;border:1px solid rgba(233,235,232,.16);background:#131613;border-radius:20px;display:flex;flex-direction:column;text-align:center;transition:border-color .3s,transform .3s;">
+        <span data-t="tier1_name" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;"></span>
+        <div style="margin-top:24px;display:flex;align-items:baseline;justify-content:center;gap:8px;">
+          <span data-t="tier1_price" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:400;letter-spacing:-.01em;"></span>
+        </div>
+        <span data-t="tier1_monthly" style="font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:.5;margin-top:8px;"></span>
+        <hr style="width:100%;border:none;border-top:1px solid rgba(233,235,232,.14);margin:28px 0;">
+        <ul data-t-list="tier1_features" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.5;text-align:start;flex-grow:1;"></ul>
+        <a href="#contact" class="pricing-btn" data-t="pricing_cta" style="margin-top:32px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(233,235,232,.28);border-radius:8px;padding:14px 22px;font-size:15px;font-weight:600;transition:border-color .25s,background .25s,color .25s;"></a>
+      </div>
+
+      <div data-reveal class="pricing-card pricing-card-popular" style="padding:48px 32px;border:2px solid #C9F7C5;background:#171B17;border-radius:20px;display:flex;flex-direction:column;text-align:center;position:relative;transform:scale(1.06);box-shadow:0 20px 60px rgba(201,247,197,.08);z-index:2;">
+        <span style="position:absolute;top:0;inset-inline-end:0;background:#C9F7C5;color:#0E100E;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:0 18px 0 14px;display:inline-flex;align-items:center;gap:6px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z"></path></svg>
+          <span data-t="tier3_badge"></span>
+        </span>
+        <span data-t="tier3_name" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#C9F7C5;"></span>
+        <div style="margin-top:24px;display:flex;align-items:baseline;justify-content:center;gap:8px;">
+          <span data-t="tier3_price" style="font-family:'Frank Ruhl Libre',serif;font-size:52px;font-weight:400;letter-spacing:-.01em;"></span>
+        </div>
+        <span data-t="tier3_monthly" style="font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:.6;margin-top:8px;"></span>
+        <hr style="width:100%;border:none;border-top:1px solid rgba(233,235,232,.14);margin:28px 0;">
+        <ul data-t-list="tier3_features" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.5;text-align:start;flex-grow:1;"></ul>
+        <a href="#contact" class="pricing-btn pricing-btn-popular" data-t="pricing_cta" style="margin-top:32px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#C9F7C5;color:#0E100E;border-radius:8px;padding:16px 22px;font-size:15px;font-weight:600;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;"></a>
+      </div>
+
+      <div data-reveal class="pricing-card" style="padding:40px 32px;border:1px solid rgba(233,235,232,.16);background:#131613;border-radius:20px;display:flex;flex-direction:column;text-align:center;transition:border-color .3s,transform .3s;">
+        <span data-t="tier2_name" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;"></span>
+        <div style="margin-top:24px;display:flex;align-items:baseline;justify-content:center;gap:8px;">
+          <span data-t="tier2_price" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:400;letter-spacing:-.01em;"></span>
+        </div>
+        <span data-t="tier2_monthly" style="font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:.5;margin-top:8px;"></span>
+        <hr style="width:100%;border:none;border-top:1px solid rgba(233,235,232,.14);margin:28px 0;">
+        <ul data-t-list="tier2_features" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.5;text-align:start;flex-grow:1;"></ul>
+        <a href="#contact" class="pricing-btn" data-t="pricing_cta" style="margin-top:32px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(233,235,232,.28);border-radius:8px;padding:14px 22px;font-size:15px;font-weight:600;transition:border-color .25s,background .25s,color .25s;"></a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="faq" style="position:relative;z-index:1;background:#0E100E;padding:160px 0 200px;">
+    <div style="max-width:1400px;margin:0 auto;padding:0 56px;">
+    <div data-reveal style="display:flex;align-items:baseline;gap:20px;">
+      <span data-t="nav_faq" data-prefix="06 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#C9F7C5;"></span>
+      <h2 data-t="faq_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:300;letter-spacing:-.02em;margin:0;"></h2>
+    </div>
+    <div id="faqList" style="margin-top:72px;border-top:1px solid rgba(233,235,232,.14);display:grid;grid-template-columns:1fr 1fr;column-gap:64px;"></div>
+    </div>
+  </section>
+
+  <section id="about" style="position:relative;z-index:1;background:#EAEAE7;color:#1A1C1A;">
+    <div id="aboutInner" style="max-width:1400px;margin:0 auto;padding:140px 56px;">
       <div style="display:flex;align-items:baseline;gap:20px;">
-        <span data-t="nav_about" data-prefix="05 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.62;"></span>
-        <h2 data-t="about_section_title" style="font-family:'Frank Ruhl Libre',serif;font-size:46px;font-weight:400;letter-spacing:-.02em;margin:0;"></h2>
+        <span data-t="nav_about" data-prefix="07 / " style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.62;"></span>
+        <h2 data-t="about_section_title" style="font-family:'Frank Ruhl Libre',serif;font-size:58px;font-weight:400;letter-spacing:-.02em;margin:0;"></h2>
       </div>
       <div style="margin-top:64px;border-top:1px solid rgba(26,28,26,.2);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0;">
         <div style="border-inline-end:1px solid rgba(26,28,26,.14);padding-block:44px;padding-inline-start:0;padding-inline-end:44px;">
-          <img src="assets/yanir-mashta.jpg" data-t-alt="about_name" style="width:100%;height:auto;display:block;">
+          <img src="assets/yanir-mashta.webp" data-t-alt="about_name" width="600" height="750" style="width:100%;height:auto;display:block;">
         </div>
         <div style="padding-block:44px;padding-inline-end:0;padding-inline-start:56px;">
           <h3 data-t="about_name" style="font-family:'Frank Ruhl Libre',serif;font-size:40px;font-weight:400;letter-spacing:-.02em;margin:0;"></h3>
@@ -298,8 +422,8 @@ a:hover{color:inherit;}
 
   <section id="contact" style="position:relative;z-index:1;background:#C9F7C5;color:#0E100E;overflow:hidden;">
     <div id="ctaGlow"></div>
-    <div id="contactInner" style="position:relative;max-width:1400px;margin:0 auto;padding:110px 56px;">
-      <span data-reveal-stagger style="transition-delay:.05s;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;display:inline-block;"><span data-t="nav_cta" data-prefix="06 / "></span></span>
+    <div id="contactInner" style="position:relative;max-width:1400px;margin:0 auto;padding:150px 56px;">
+      <span data-reveal-stagger style="transition-delay:.05s;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;display:inline-block;"><span data-t="nav_cta" data-prefix="08 / "></span></span>
       <h2 data-t="contact_title" data-reveal-stagger style="transition-delay:.15s;font-family:'Frank Ruhl Libre',serif;font-size:76px;font-weight:400;line-height:1.06;letter-spacing:-.03em;margin:28px 0 0;max-width:18ch;"></h2>
       <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:end;margin-top:48px;">
         <p data-t="contact_sub" data-reveal-stagger style="transition-delay:.25s;font-size:19px;line-height:1.7;margin:0;max-width:52ch;opacity:.72;"></p>
@@ -326,6 +450,8 @@ a:hover{color:inherit;}
       <a href="#services" class="footer-link" data-t="nav_services" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
       <a href="#work" class="footer-link" data-t="nav_work" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
       <a href="#process" class="footer-link" data-t="nav_process" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
+      <a href="#pricing" class="footer-link" data-t="nav_pricing" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
+      <a href="#faq" class="footer-link" data-t="nav_faq" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
       <a href="#about" class="footer-link" data-t="nav_about" style="opacity:.75;transition:color .25s,opacity .25s;"></a>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;">
@@ -347,7 +473,7 @@ a:hover{color:inherit;}
 const translations = {
   he: {
     dir: 'rtl', langCode: 'he', lang_toggle: 'EN',
-    nav_services: 'שירותים', nav_work: 'עבודות', nav_process: 'תהליך', nav_about: 'אודות', nav_cta: 'בואו נדבר',
+    nav_services: 'שירותים', nav_work: 'עבודות', nav_process: 'תהליך', nav_pricing: 'תמחור', nav_faq: 'שאלות נפוצות', nav_about: 'אודות', nav_cta: 'בואו נדבר',
     location: 'תל אביב · ישראל', availability: 'פנוי לפרויקט הבא',
     tech_label: 'נבנה עם טכנולוגיה מודרנית ·',
     hero_kicker: 'פיתוח אתרים ומערכות · פתרונות AI',
@@ -371,6 +497,21 @@ const translations = {
     step2_title: 'עיצוב', step2_body: 'הקונספט נבנה ישר בדפדפן, כך שאתם מאשרים את הדבר האמיתי.',
     step3_title: 'בנייה', step3_body: 'קוד נקי וברור לתחזוקה, עם ניהול תוכן בדיוק היכן שצריך.',
     step4_title: 'השקה', step4_body: 'עולים לאוויר, עוקבים אחרי השבועות הראשונים, ומעבירים לכם מוצר שאתם יכולים להפעיל.',
+    pricing_title: 'תמחור', pricing_sub: 'מחירים התחלתיים לפי היקף הפרויקט. כל פרויקט מתומחר סופית אחרי שיחת אפיון קצרה.',
+    pricing_cta: 'בואו נדבר',
+    tier1_name: 'Starter', tier1_price: '₪1,299', tier1_monthly: '+ ₪99 לחודש',
+    tier1_features: ['עד 3 עמודים', 'עיצוב מותאם למובייל', 'הגדרות SEO בסיסיות', 'טופס יצירת קשר'],
+    tier2_name: 'Professional', tier2_price: '₪1,949', tier2_monthly: '+ ₪169 לחודש',
+    tier2_features: ['עד 8 עמודים', 'עיצוב מותאם למובייל', 'הגדרות SEO מתקדמות', 'טופס יצירת קשר + מערכת הזמנות', 'הטמעת אנליטיקס'],
+    tier3_badge: 'הכי פופולרי', tier3_name: 'Premium', tier3_price: '₪4,890', tier3_monthly: '+ ₪319 לחודש',
+    tier3_features: ['עמודים ללא הגבלה', 'עיצוב מותאם למובייל', 'חבילת SEO מלאה', 'טופס יצירת קשר + מערכת הזמנות', 'הטמעת אנליטיקס', 'הגדרת דומיין מותאם אישית', 'תמיכה עדיפה (מענה תוך 48 שעות)', 'ערכת זהות מותגית בסיסית', '3 חודשי תחזוקה חינם', 'עמדת/כרטיס לביקורות גוגל', 'מערכת תורים/הזמנות אונליין', 'תשלום אונליין', 'הגדרת SEO', 'שליחת SMS אוטומטית לשיחות שלא נענו'],
+    faq_title: 'שאלות נפוצות',
+    faq_items: [
+      { q: 'כמה זמן לוקח לבנות אתר?', a: 'תלוי בהיקף — אתר תדמית פשוט לוקח כשבועיים-שלושה, מערכת מותאמת אישית או פתרון עם AI יכולים לקחת 4-8 שבועות. בשיחת האפיון הראשונה תקבלו לוח זמנים מדויק לפרויקט שלכם.' },
+      { q: 'איך נראה התהליך?', a: 'מתחילים בשיחת גילוי קצרה כדי להבין מטרות וקהל, עוברים לעיצוב שנבנה ישר בדפדפן כדי שתראו את הדבר האמיתי, בונים בקוד נקי, ומשיקים תוך מעקב צמוד בשבועות הראשונים.' },
+      { q: 'כמה סבבי תיקונים כלולים?', a: 'כל חבילה כוללת סבבי עריכה בשלב העיצוב עד שאתם מרוצים מהכיוון, ותיקוני באגים חינם אחרי ההשקה. שינויי תוכן משמעותיים אחרי אישור העיצוב מתואמים בנפרד.' },
+      { q: 'מה קורה אחרי ההשקה?', a: 'החבילה החודשית כוללת אחסון, עדכוני אבטחה וזמינות לתיקונים שוטפים. אני עוקב אחרי הביצועים בשבועות הראשונים ונשאר זמין ישירות — בלי אנשי תיווך — לכל שינוי או שאלה.' }
+    ],
     work1_name: 'וילה אל נוף פנורמה', work1_tag: 'אתר תדמית לנופש', work1_url: 'https://villa-el-nof-panorama.co.il/',
     work2_name: 'Lifemaxing', work2_tag: 'פלטפורמה אישית', work2_url: 'https://my-lifemaxing.base44.app/',
     work3_name: 'TalentFlow', work3_tag: 'פתרון עסקי מותאם', work3_url: 'https://talentflow-sable.vercel.app/',
@@ -395,7 +536,7 @@ const translations = {
   },
   en: {
     dir: 'ltr', langCode: 'en', lang_toggle: 'עב',
-    nav_services: 'Services', nav_work: 'Work', nav_process: 'Process', nav_about: 'About', nav_cta: "Let's talk",
+    nav_services: 'Services', nav_work: 'Work', nav_process: 'Process', nav_pricing: 'Pricing', nav_faq: 'FAQ', nav_about: 'About', nav_cta: "Let's talk",
     location: 'Tel Aviv · IL', availability: 'Open for the next project',
     tech_label: 'Built with modern technology ·',
     hero_kicker: 'Web & software development · AI solutions',
@@ -419,6 +560,21 @@ const translations = {
     step2_title: 'Design', step2_body: 'Concepts are built straight in the browser, so you review the real thing.',
     step3_title: 'Build', step3_body: 'Clean, maintainable code — content-managed exactly where it should be.',
     step4_title: 'Launch', step4_body: 'We ship, watch the first weeks closely, and hand you a product you can run.',
+    pricing_title: 'Pricing', pricing_sub: 'Starting prices based on project scope. Every project gets a final quote after a short scoping call.',
+    pricing_cta: "Let's talk",
+    tier1_name: 'Starter', tier1_price: '₪1,299', tier1_monthly: '+ ₪99/mo',
+    tier1_features: ['Up to 3 pages', 'Mobile responsive design', 'Basic SEO setup', 'Contact form'],
+    tier2_name: 'Professional', tier2_price: '₪1,949', tier2_monthly: '+ ₪169/mo',
+    tier2_features: ['Up to 8 pages', 'Mobile responsive design', 'On-page SEO setup', 'Contact form + booking integration', 'Analytics setup'],
+    tier3_badge: 'Most popular', tier3_name: 'Premium', tier3_price: '₪4,890', tier3_monthly: '+ ₪319/mo',
+    tier3_features: ['Unlimited pages', 'Mobile responsive design', 'Full SEO package', 'Contact form + booking integration', 'Analytics setup', 'Custom domain setup', 'Priority support (48h response)', 'Basic brand identity kit', '3 months of free maintenance', 'Google Review stand/card', 'Online appointment/booking system', 'Online payment', 'SEO setup', 'Missed-call auto-text'],
+    faq_title: 'FAQ',
+    faq_items: [
+      { q: 'How long does a project take?', a: "It depends on scope — a simple brand site takes about two to three weeks, while a custom system or an AI-powered solution can take four to eight weeks. You'll get an exact timeline for your project after the first scoping call." },
+      { q: "What's the process?", a: "We start with a short discovery call to map goals and audience, move into design that's built straight in the browser so you see the real thing, build it in clean code, and launch with close monitoring in the first weeks." },
+      { q: 'How many revisions are included?', a: 'Every package includes revision rounds during the design phase until you\'re happy with the direction, plus free bug fixes after launch. Major content changes after design sign-off are scoped separately.' },
+      { q: 'What happens after launch?', a: "The monthly plan covers hosting, security updates and availability for ongoing fixes. I track performance closely in the first weeks and stay directly reachable — no account managers — for any change or question." }
+    ],
     work1_name: 'Villa El Nof Panorama', work1_tag: 'Hospitality site', work1_url: 'https://villa-el-nof-panorama.co.il/',
     work2_name: 'Lifemaxing', work2_tag: 'Personal platform', work2_url: 'https://my-lifemaxing.base44.app/',
     work3_name: 'TalentFlow', work3_tag: 'Custom business solution', work3_url: 'https://talentflow-sable.vercel.app/',
@@ -444,10 +600,10 @@ const translations = {
 };
 
 const workData = [
-  { key: 'work1', img: 'assets/villa-el-nof.png' },
-  { key: 'work2', img: 'assets/lifemaxing.png' },
-  { key: 'work3', img: 'assets/talentflow.png' },
-  { key: 'work4', img: 'assets/pizza-mashta.png' }
+  { key: 'work1', img: 'assets/villa-el-nof.webp' },
+  { key: 'work2', img: 'assets/lifemaxing.webp' },
+  { key: 'work3', img: 'assets/talentflow.webp' },
+  { key: 'work4', img: 'assets/pizza-mashta.webp' }
 ];
 
 let lang = 'he';
@@ -485,7 +641,7 @@ function workCardCss(o) {
   const s = o < 0 ? -1 : 1;
   const a = Math.abs(o);
   const isMobile = mobileMq.matches;
-  const w = isMobile ? Math.min(360, window.innerWidth - 64) : 560;
+  const w = isMobile ? Math.min(360, window.innerWidth - 64) : 720;
   const h = Math.round(w * (372 / 560));
   const depthUnit = isMobile ? w * 0.7 : 220;
   let transform, opacity, filter, zIndex, boxShadow;
@@ -516,10 +672,22 @@ function renderSteps() {
   const tr = t();
   const types = ['discovery', 'design', 'development', 'launch'];
   const imgs = {
-    discovery: 'assets/process-1-discovery.png',
-    design: 'assets/process-2-design.png',
-    development: 'assets/process-3-build.png',
-    launch: 'assets/process-4-launch.png'
+    discovery: 'assets/process-1-discovery.webp',
+    design: 'assets/process-2-design.webp',
+    development: 'assets/process-3-build.webp',
+    launch: 'assets/process-4-launch.webp'
+  };
+  const vids = {
+    discovery: 'assets/video/step1-discovery.mp4',
+    design: 'assets/video/step2-design.mp4',
+    development: 'assets/video/step3-build.mp4',
+    launch: 'assets/video/step4-launch.mp4'
+  };
+  const posters = {
+    discovery: 'assets/video/step1-discovery-poster.webp',
+    design: 'assets/video/step2-design-poster.webp',
+    development: 'assets/video/step3-build-poster.webp',
+    launch: 'assets/video/step4-launch-poster.webp'
   };
   stepsContainer.innerHTML = '';
   types.forEach((type, i) => {
@@ -543,8 +711,9 @@ function renderSteps() {
     col.style.cssText = 'position:relative;display:flex;flex-direction:column;cursor:pointer;opacity:1;transform:translateY(0);';
     col.addEventListener('click', () => { stepN = 0; activeStep = i; renderSteps(); updateSpine(); });
     col.innerHTML = `
-      <div style="position:relative;flex:none;height:216px;border:${cardBorder};background:${cardBg};box-sizing:border-box;overflow:hidden;transition:border-color .7s ease,background .7s ease;">
+      <div class="stepMedia" data-step-type="${type}" style="position:relative;flex:none;height:216px;border:${cardBorder};background:${cardBg};box-sizing:border-box;overflow:hidden;transition:border-color .7s ease,background .7s ease;">
         <img src="${imgs[type]}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:${imgScale};filter:${imgFilter};transition:transform 1.1s cubic-bezier(.2,.8,.2,1),filter .8s ease;">
+        <video class="stepVideo" muted loop playsinline preload="none" poster="${posters[type]}" data-src="${vids[type]}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;filter:${imgFilter};transition:opacity .9s ease,filter .8s ease;"></video>
         <span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,16,14,.72),rgba(14,16,14,.18) 55%,rgba(14,16,14,.34));"></span>
         <span style="position:absolute;inset-inline-end:14px;bottom:-18px;font-family:'Frank Ruhl Libre',serif;font-weight:300;font-size:92px;color:rgba(233,235,232,.05);line-height:1;">${n}</span>
       </div>
@@ -560,6 +729,48 @@ function renderSteps() {
       </div>`;
     stepsContainer.appendChild(col);
   });
+  activateStepVideo();
+}
+
+const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let processInView = false;
+
+function activateStepVideo() {
+  const videos = stepsContainer.querySelectorAll('.stepVideo');
+  videos.forEach((v, i) => {
+    if (reducedMotion || !processInView || mobileMq.matches) { v.style.opacity = '0'; v.pause(); return; }
+    if (i === activeStep) {
+      if (!v.getAttribute('src')) v.setAttribute('src', v.getAttribute('data-src'));
+      v.play().catch(() => {});
+      v.style.opacity = '1';
+    } else {
+      v.style.opacity = '0';
+      v.pause();
+    }
+  });
+}
+
+if ('IntersectionObserver' in window) {
+  const processSection = document.getElementById('process');
+  if (processSection) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        processInView = e.isIntersecting;
+        activateStepVideo();
+      });
+    }, { threshold: 0.15 });
+    io.observe(processSection);
+  }
+
+  const servicePanels = document.querySelectorAll('.service-panel');
+  if (servicePanels.length) {
+    const panelIo = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        e.target.classList.toggle('is-active', e.isIntersecting);
+      });
+    }, { threshold: 0.6 });
+    servicePanels.forEach((p) => panelIo.observe(p));
+  }
 }
 
 function updateSpine() {
@@ -577,7 +788,7 @@ function renderCards() {
     card.style.cssText = workCardCss(o);
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', active ? '0' : '-1');
-    card.setAttribute('aria-label', active ? (tr.aria_visit_project || 'Visit') + ' ' + tr[it.key + '_name'] : tr[it.key + '_name']);
+    card.setAttribute('aria-labelledby', 'workCardName' + i + ' workCardTag' + i + ' workCardHint' + i);
     const activate = () => {
       if (!active) { progressVal = 0; index = i; render(); }
       else window.open(url, '_blank', 'noopener,noreferrer');
@@ -594,7 +805,7 @@ function renderCards() {
 
     card.innerHTML = `
       <div style="position:absolute;inset:0;overflow:hidden;background:#151815;">
-        <div role="img" aria-label="${tr[it.key + '_name']}" style="position:absolute;inset:0;background-image:url('${it.img}');background-size:cover;background-position:top center;animation:mKen 26s ease-in-out infinite alternate;"></div>
+        <div aria-hidden="true" style="position:absolute;inset:0;background-image:url('${it.img}');background-size:cover;background-position:top center;animation:mKen 26s ease-in-out infinite alternate;"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(14,16,14,.92) 0%, rgba(14,16,14,.20) 46%, rgba(14,16,14,0) 72%);pointer-events:none;"></div>
         <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:${sheenOpacity};transition:opacity .8s ease;">
           <div style="position:absolute;top:-30%;left:0;width:20%;height:160%;background:linear-gradient(90deg, rgba(201,247,197,0), rgba(201,247,197,.14), rgba(201,247,197,0));animation:mSheen 8s cubic-bezier(.5,0,.3,1) infinite 1.6s;"></div>
@@ -602,12 +813,13 @@ function renderCards() {
       </div>
       <div style="position:absolute;left:18px;right:18px;bottom:18px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 14px 0 22px;background:rgba(14,16,14,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(233,235,232,.12);transform:${captionTransform};opacity:${captionOpacity};transition:transform .9s cubic-bezier(.16,1,.3,1) .12s, opacity .7s ease;">
         <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
-          <div style="font-size:19px;font-weight:500;letter-spacing:-.01em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tr[it.key + '_name']}</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9F7C5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tr[it.key + '_tag']}</div>
+          <div id="workCardName${i}" style="font-size:19px;font-weight:500;letter-spacing:-.01em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tr[it.key + '_name']}</div>
+          <div id="workCardTag${i}" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9F7C5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${tr[it.key + '_tag']}</div>
         </div>
-        <div class="work-arrow" style="flex:none;width:46px;height:46px;background:#C9F7C5;color:#0E100E;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:17px;transition:transform .45s cubic-bezier(.16,1,.3,1);">↖</div>
+        <div class="work-arrow" aria-hidden="true" style="flex:none;width:46px;height:46px;background:#C9F7C5;color:#0E100E;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:17px;transition:transform .45s cubic-bezier(.16,1,.3,1);">↖</div>
       </div>
       <div style="position:absolute;inset:0;pointer-events:none;background:rgba(14,16,14,.6);opacity:${veilOpacity};transition:opacity .9s ease;"></div>
+      <span id="workCardHint${i}" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">${active ? (tr.aria_visit_project || 'Visit') : ''}</span>
     `;
     cardsContainer.appendChild(card);
   });
@@ -620,12 +832,15 @@ function renderDots() {
     const isActive = i === index;
     const btn = document.createElement('button');
     btn.setAttribute('aria-label', tr[it.key + '_name']);
-    btn.style.cssText = `position:relative;width:${isActive ? '44px' : '8px'};height:8px;padding:0;border:none;cursor:pointer;overflow:hidden;background:rgba(233,235,232,.20);transition:width .8s cubic-bezier(.16,1,.3,1), background .4s;`;
+    btn.style.cssText = `position:relative;width:${isActive ? '44px' : '24px'};height:24px;padding:0;border:none;cursor:pointer;background:none;display:flex;align-items:center;transition:width .8s cubic-bezier(.16,1,.3,1);`;
     btn.addEventListener('click', () => { progressVal = 0; index = i; render(); });
+    const track = document.createElement('span');
+    track.style.cssText = `position:relative;display:block;width:100%;height:8px;overflow:hidden;background:rgba(233,235,232,.20);transition:background .4s;`;
     const fill = document.createElement('span');
     fill.style.cssText = 'position:absolute;left:0;top:0;bottom:0;background:#C9F7C5;width:0%;transition:width .12s linear;';
     if (isActive) fill.id = 'activeFill';
-    btn.appendChild(fill);
+    track.appendChild(fill);
+    btn.appendChild(track);
     dotsContainer.appendChild(btn);
   });
 }
@@ -667,6 +882,46 @@ function applyTilt() {
   tiltInner.style.transform = 'rotateY(' + (mx * 4).toFixed(2) + 'deg) rotateX(' + (-my * 2.4).toFixed(2) + 'deg)';
 }
 
+function renderPricingFeatures() {
+  const tr = t();
+  document.querySelectorAll('[data-t-list]').forEach((el) => {
+    const key = el.getAttribute('data-t-list');
+    const items = tr[key] || [];
+    el.innerHTML = items.map((f) => `
+      <li style="display:flex;align-items:flex-start;gap:10px;opacity:.8;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9F7C5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>${f}</span>
+      </li>`).join('');
+  });
+}
+
+let openFaq = 0;
+
+function renderFaq() {
+  const tr = t();
+  const faqList = document.getElementById('faqList');
+  const items = tr.faq_items || [];
+  faqList.innerHTML = '';
+  items.forEach((item, i) => {
+    const isOpen = i === openFaq;
+    const row = document.createElement('div');
+    row.style.cssText = 'border-bottom:1px solid rgba(233,235,232,.14);';
+    row.innerHTML = `
+      <button aria-expanded="${isOpen}" style="all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;padding:28px 0;cursor:pointer;font-family:'Frank Ruhl Libre',serif;font-size:22px;font-weight:400;letter-spacing:-.01em;">
+        <span>${item.q}</span>
+        <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:18px;color:#C9F7C5;transform:rotate(${isOpen ? '45deg' : '0deg'});transition:transform .35s ease;">+</span>
+      </button>
+      <div style="max-height:${isOpen ? '400px' : '0'};overflow:hidden;transition:max-height .45s cubic-bezier(.2,.8,.2,1);">
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.75;opacity:.65;max-width:70ch;">${item.a}</p>
+      </div>`;
+    row.querySelector('button').addEventListener('click', () => {
+      openFaq = isOpen ? -1 : i;
+      renderFaq();
+    });
+    faqList.appendChild(row);
+  });
+}
+
 function render() {
   rootEl.setAttribute('dir', t().dir);
   rootEl.setAttribute('lang', t().langCode);
@@ -676,6 +931,8 @@ function render() {
   renderCards();
   renderDots();
   renderTestimonial();
+  renderPricingFeatures();
+  renderFaq();
   applyTilt();
 }
 
@@ -870,32 +1127,82 @@ setInterval(() => {
     }
   }
 
-  seed();
-  draw(false);
-  if (reduced) return;
+  function start() {
+    seed();
+    draw(false);
+    if (reduced) return;
 
-  window.addEventListener('pointermove', (e) => {
-    field.tx = (e.clientX / window.innerWidth - .5) * 2;
-    field.ty = (e.clientY / window.innerHeight - .5) * 2;
-  }, { passive: true });
+    window.addEventListener('pointermove', (e) => {
+      field.tx = (e.clientX / window.innerWidth - .5) * 2;
+      field.ty = (e.clientY / window.innerHeight - .5) * 2;
+    }, { passive: true });
 
-  window.addEventListener('resize', () => { seed(); draw(false); }, { passive: true });
+    window.addEventListener('resize', () => { seed(); draw(false); }, { passive: true });
 
-  function covers() {
-    const vh = window.innerHeight;
-    for (let i = 0; i < opaqueEls.length; i++) {
-      const r = opaqueEls[i].getBoundingClientRect();
-      if (r.top <= 0 && r.bottom >= vh) return true;
+    function covers() {
+      const vh = window.innerHeight;
+      for (let i = 0; i < opaqueEls.length; i++) {
+        const r = opaqueEls[i].getBoundingClientRect();
+        if (r.top <= 0 && r.bottom >= vh) return true;
+      }
+      return false;
     }
-    return false;
-  }
-  let n = 0, live = true;
-  function loop() {
-    if ((n++ & 7) === 0) live = document.visibilityState !== 'hidden' && !covers();
-    if (live) draw(true);
+    let n = 0, live = true;
+    function loop() {
+      if ((n++ & 7) === 0) live = document.visibilityState !== 'hidden' && !covers();
+      if (live) draw(true);
+      requestAnimationFrame(loop);
+    }
     requestAnimationFrame(loop);
   }
-  requestAnimationFrame(loop);
+
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
+  else setTimeout(start, 200);
+})();
+
+/* Hero background video: deferred start, viewport-gated, reduced-motion safe */
+(function () {
+  const heroVideo = document.getElementById('heroVideo');
+  const heroPosterImg = document.getElementById('heroPoster');
+  const heroSection = document.getElementById('top');
+  if (!heroVideo || !heroSection) return;
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || mobileMq.matches) return;
+
+  let started = false;
+  function startHeroVideo() {
+    if (started) return;
+    started = true;
+    const source = heroVideo.querySelector('source');
+    if (source && source.dataset.src) source.src = source.dataset.src;
+    heroVideo.load();
+    heroVideo.play().then(() => {
+      heroVideo.style.opacity = '1';
+      if (heroPosterImg) heroPosterImg.style.opacity = '0';
+    }).catch(() => {});
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!started) {
+            if ('requestIdleCallback' in window) requestIdleCallback(startHeroVideo, { timeout: 1500 });
+            else setTimeout(startHeroVideo, 300);
+          } else {
+            heroVideo.play().catch(() => {});
+          }
+        } else if (started) {
+          heroVideo.pause();
+        }
+      });
+    }, { threshold: 0.1 });
+    io.observe(heroSection);
+  } else if ('requestIdleCallback' in window) {
+    requestIdleCallback(startHeroVideo, { timeout: 1500 });
+  } else {
+    setTimeout(startHeroVideo, 300);
+  }
 })();
 
 let resizeTimer;
